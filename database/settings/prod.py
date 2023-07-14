@@ -11,8 +11,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["levus-database.herokuapp.com"]
 
-CSRF_TRUSTED_ORIGINS = ['https://super-mart2.herokuapp.com',
-                        'https://localhost:3000', 'https://betcodes-fe.vercel.app/']
+CSRF_TRUSTED_ORIGINS = ['https://levus-database.herokuapp.com',
+                        'https://localhost:3000']
 
 DATABASES = {
     'default': dj_database_url.config()

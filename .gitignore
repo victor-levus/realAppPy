@@ -1,0 +1,7 @@
+/media/
+/static/
+
+*.env
+bin/
+lib/
+*.sqlite3

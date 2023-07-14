@@ -29,15 +29,17 @@ class ReplySerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         comment_id = self.context['comment_id']
         user_id = self.context['user_id']
+
         return Reply.objects.create(comment_id=comment_id, user_id=user_id.id, **validated_data)
 
 
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.CharField(read_only=True)
+    replys = ReplySerializer(many=True, read_only=True)
 
     class Meta:
         model = Comment
-        fields = ['id', 'user', 'description', 'placed_at']
+        fields = ['id', 'post', 'user', 'description', 'replys', 'placed_at']
 
     def create(self, validated_data):
         post_id = self.context['post_id']

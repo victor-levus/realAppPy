@@ -26,7 +26,7 @@ comments_router.register('replys', views.ReplyViewSet,
 
 
 # URLConf
-urlpatterns = router.urls + posts_router.urls
+urlpatterns = router.urls + posts_router.urls + comments_router.urls
 
 
 # urlpatterns = router.urls + products_router.urls + carts_router.urls

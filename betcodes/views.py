@@ -4,7 +4,7 @@ from rest_framework.permissions import SAFE_METHODS, AllowAny, IsAdminUser, IsAu
 import logging
 
 from betcodes.models import BetCode, FootballClub, BookCodeInfo, Likes, Post, Comment, Reply
-from betcodes.serializers import BetCodeSerializer, FootballClubSerializer, BookCodeInfoSerializer, LikeSerializer, PostSerializer, CommentSerializer, ReplySerializer
+from betcodes.serializers import BetCodeSerializer, FootballClubSerializer, BookCodeInfoSerializer, LikeSerializer, PostSerializer, CommentSerializer, CreateCommentSerializer, ReplySerializer
 
 
 logger = logging.getLogger(__name__)
@@ -57,7 +57,10 @@ class ProfilePostViewSet(ModelViewSet):
 
 
 class CommentViewSet(ModelViewSet):
-    serializer_class = CommentSerializer
+    def get_serializer_class(self):
+        if self.request.method in SAFE_METHODS:
+            return CommentSerializer
+        return CreateCommentSerializer
 
     def get_queryset(self):
         return Comment.objects.filter(post_id=self.kwargs['post_pk'])
